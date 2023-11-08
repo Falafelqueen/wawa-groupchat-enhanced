@@ -1,0 +1,9 @@
+<div class="px-4 py-2 border rounded-lg shadow-md mb-4 w-80  <%=  'mr-0 ml-auto' if message.user == @user %>">
+  <%= message.text %>
+  <div class="flex justify-between items-center">
+    <p><%= message.user.display_name %></p>
+    <p class="text-gray-600 text-sm">
+      <%= message.created_at%>
+    </p>
+  </div>
+</div>

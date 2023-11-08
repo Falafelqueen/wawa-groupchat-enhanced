@@ -3,5 +3,9 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
-  # root "articles#index"
+   root "chatrooms#index"
+
+   resources :chatrooms, only: [:index, :show, :create] do
+      resources :messages, only: :create
+   end
 end
