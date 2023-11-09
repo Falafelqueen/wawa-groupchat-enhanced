@@ -2,7 +2,8 @@ class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: [:show]
 
   def index
-    @chatrooms = Chatroom.includes(:messages)
+    # Display new chatrooms first
+    @chatrooms = Chatroom.includes(:messages).order(created_at: :desc)
   end
 
   def show
@@ -17,7 +18,6 @@ class ChatroomsController < ApplicationController
       #respond_to do |format|
       #  format.html { redirect_to chatroom_path(@chatroom) }
       #end
-
   end
 
   private

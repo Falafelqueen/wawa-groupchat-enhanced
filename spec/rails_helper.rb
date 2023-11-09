@@ -2,7 +2,8 @@
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
-require_relative 'support/*'
+require_relative 'support/factory_bot'
+require_relative 'support/chrome'
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
@@ -63,4 +64,20 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  config.include Devise::TestHelpers, type: :controller
+  config.include Warden::Test::Helpers
+
+ #any thing in the db at begin of test suite is cleared
+ config.before(:suite) do
+  DatabaseCleaner.clean_with :truncation
+  end
+#before each test start cleaner
+  config.before(:each) do
+  DatabaseCleaner.start
+  end
+#after each test clear database
+  config.after(:each) do
+  DatabaseCleaner.clean
+  end
 end

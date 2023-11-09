@@ -3,9 +3,12 @@ import { Controller } from "@hotwired/stimulus";
 // Connects to data-controller="messages"
 export default class extends Controller {
   static targets = ["messages"];
-  connect() {}
+  connect() {
+    console.log("Form controller connected");
+  }
 
-  clearForm(e) {
-    e.target.reset();
+  clearForm() {
+    console.log("Clearing form");
+    this.element.reset();
   }
 }

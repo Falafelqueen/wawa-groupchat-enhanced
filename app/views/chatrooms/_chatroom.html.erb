@@ -1,13 +1,15 @@
-<%= link_to chatroom_path(chatroom), class: 'border rounded-lg shadow-md p-4 my-4 flex items-center' do %>
-    <div class="w-full">
-    <div class="flex justify-between">
-      <h3 class="font-bold"><%= chatroom.name %></h3>
-      <p class="text-right text-gray-600"><%= "👥 #{chatroom.users.uniq.count} users" %></p>
-    </div>
-    <% if message = chatroom.messages.last %>
-      <p class="text-gray-600"><%= "#{message.text} (#{message.user.display_name}) "%></p>
-    <% else %>
-      <p class="text-gray-600">No messages yet. Start the conversation</p>
+  <%= turbo_frame_tag dom_id(chatroom) do %>
+    <%= link_to chatroom_path(chatroom), class: 'border rounded-lg shadow-md p-4 my-4 flex items-center', data: {turbo_frame: '_top'} do %>
+        <div class="w-full">
+        <div class="flex justify-between">
+          <h3 class="font-bold"><%= chatroom.name %></h3>
+          <p class="text-right text-gray-600"><%= "👥 #{chatroom.users.uniq.count} users" %></p>
+        </div>
+        <% if message = chatroom.messages.last %>
+          <p class="text-gray-600"><%= "#{message.text} (#{message.user.display_name}) "%></p>
+        <% else %>
+          <p class="text-gray-600">No messages yet. Start the conversation</p>
+        <% end %>
+        </div>
     <% end %>
-    </div>
-<% end %>
+  <% end %>
