@@ -1,24 +1,18 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple chat application built in 4 hours.
 
-Things you may want to cover:
+Feautures
+* Rails 7
 
-* Ruby version
+* User authentication with Devise
 
-* System dependencies
+* Group chat functionality
 
-* Configuration
+* Hotwire, Stimulus
 
-* Database creation
+* Basic styling with Tailwind
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
+* Basic unit tests with Rspec
 
 * ...
