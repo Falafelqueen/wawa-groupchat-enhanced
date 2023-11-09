@@ -1,6 +1,4 @@
 <%= turbo_stream_from "chatrooms" %>
-<p>👤 <%= current_user.display_name %></p>
-
 <h1 class="text-center font-bold text-3xl">Chatrooms</h1>
 <div data-controller="toggle-hidden" class="text-right">
   <%= button_tag '➕ Add chatgroup', data: { action: 'click->toggle-hidden#show keyup.enter->toggle-hidden#show', toggle_hidden_target: 'btn'} %>

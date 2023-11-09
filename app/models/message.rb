@@ -17,6 +17,6 @@ class Message < ApplicationRecord
   end
 
   def update_user_count
-    broadcast_append_to "chatroom", target: "user-count", partial: "chatrooms/user_count", locals: {count: chatroom.user_count}
+    broadcast_replace_to "chatroom", target: "user-count", partial: "chatrooms/user_count", locals: {count: chatroom.user_count}
   end
 end
