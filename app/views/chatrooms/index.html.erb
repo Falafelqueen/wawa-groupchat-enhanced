@@ -2,13 +2,14 @@
 <p>👤 <%= current_user.display_name %></p>
 
 <h1 class="text-center font-bold text-3xl">Chatrooms</h1>
+<div data-controller="toggle-hidden" class="text-right">
+  <%= button_tag '➕ Add chatgroup', data: { action: 'click->toggle-hidden#show keyup.enter->toggle-hidden#show', toggle_hidden_target: 'btn'} %>
+  <%= form_with url: chatrooms_path, data: {controller: 'form', action: 'turbo:submit-end->form#clearForm turbo:submit-end->toggle-hidden#hide', turbo_frame: 'chatrooms', toggle_hidden_target: 'form'}, html: {class: 'hidden pt-5'} do |f| %>
+    <%= f.text_field :name, class: 'w-4/6 border border-slate-300 rounded-md shadow-md'%>
+    <%= f.submit 'Create new chatroom', class: 'text-white font-semibold py-2 px-4 rounded cursor-pointer bg-primary hover:bg-primary-dark' %>
+  <% end %>
+</div>
 
 <%= turbo_frame_tag :chatrooms do %>
   <%= render @chatrooms %>
-<% end %>
-
-
-<%= form_with url: chatrooms_path, data: {controller: 'form', action: 'turbo:submit-end->form#clearForm', turbo_frame: 'chatrooms'} do |f| %>
-  <%= f.text_field :name, class: 'w-4/6 border border-slate-300 rounded-md shadow-md'%>
-  <%= f.submit 'Create new chatroom', class: 'bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 px-4 rounded cursor-pointer' %>
 <% end %>

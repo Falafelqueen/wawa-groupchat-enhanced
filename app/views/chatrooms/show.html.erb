@@ -1,7 +1,7 @@
 <%= turbo_stream_from "chatroom" %>
 <h2 class="text-center font-bold text-2xl"><%= @chatroom.name %></h2>
-<p class="text-right text-gray-600"><%= "👥 #{@chatroom.users.uniq.count} users" %></p>
-<div class="border h-96 w-full overflow-scroll px-3 bg-white">
+<p class="text-right text-gray-600"><%= "👥 #{pluralize(@chatroom.users.uniq.count, 'user')}" %></p>
+<div class="h-60vh w-full overflow-scroll px-4 bg-secondary py-4 rounded-lg">
   <%= turbo_frame_tag :messages do %>
       <% if @messages %>
         <% @messages.each do |message| %>

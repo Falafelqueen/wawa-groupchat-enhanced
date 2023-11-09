@@ -10,6 +10,7 @@ module.exports = {
   theme: {
     colors: {
       primary: {
+        light: "rgba(34, 51, 122, 0.6)",
         DEFAULT: "rgb(34, 51, 122)",
         dark: "rgb(17, 30, 84)",
       },
@@ -19,6 +20,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["Inter var", ...defaultTheme.fontFamily.sans],
+      },
+      height: {
+        "60vh": "60vh",
       },
     },
   },

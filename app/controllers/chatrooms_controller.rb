@@ -2,8 +2,8 @@ class ChatroomsController < ApplicationController
   before_action :set_chatroom, only: [:show]
 
   def index
-    # Display new chatrooms first
-    @chatrooms = Chatroom.includes(:messages).order(created_at: :desc)
+    # Display chatrooms ordered by most recent messages first
+    @chatrooms = Chatroom.ordered_by_latest_message
   end
 
   def show
