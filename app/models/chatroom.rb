@@ -13,4 +13,8 @@ class Chatroom < ApplicationRecord
   def latest_message
     messages.order(created_at: :desc).first
   end
+
+  def user_count
+    users.uniq.count
+  end
 end
