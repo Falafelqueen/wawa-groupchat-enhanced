@@ -5,13 +5,20 @@ class Message < ApplicationRecord
   after_create_commit :update_chatroom
   after_create_commit :update_user_count
   after_create_commit :update_user_preview
+  after_create_commit :join_chatroom
 
   private
 
+  def join_chatroom
+    # Add user to chatroom if not already a member
+    unless chatroom.users.include?(user)
+      chatroom.users << user
+    end
+  end
+
   def update_chatroom
-    # Update user count
     # Append message to chatroom
-    broadcast_append_to "chatroom", target: "messages", partial: "messages/message", locals: { message: self }
+    broadcast_append_to "chatroom", target: "messages_#{chatroom.id}", partial: "messages/message", locals: { message: self }
     # Update chatroom list on index
     broadcast_replace_to "chatrooms", partial: "chatrooms/chatroom", target: "chatroom_#{chatroom.id}", locals: {chatroom: chatroom}
     # Update chatroom list on show
@@ -19,7 +26,7 @@ class Message < ApplicationRecord
   end
 
   def update_user_preview
-    # Display the chatroom as user chat in the preview list
+    # Display the chatrooms in the preview list
     broadcast_replace_to "chatroom", partial: "chatrooms/chatroom_preview", target: "chatroom_preview", locals: {chatrooms: Chatroom.ordered_by_latest_message, hide_count: true }
   end
 

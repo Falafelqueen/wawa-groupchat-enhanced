@@ -9,6 +9,7 @@
 puts "Cleaning up the database"
 
 Message.destroy_all
+UserChatroom.destroy_all
 Chatroom.destroy_all
 User.destroy_all
 

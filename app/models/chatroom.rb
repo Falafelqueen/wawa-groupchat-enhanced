@@ -1,6 +1,7 @@
 class Chatroom < ApplicationRecord
   has_many :messages, dependent: :destroy
-  has_many :users, through: :messages
+  has_many :user_chatrooms, dependent: :destroy
+  has_many :users, through: :user_chatrooms
 
   validates :name, presence: true
 
@@ -11,7 +12,7 @@ class Chatroom < ApplicationRecord
       .select('chatrooms.*, COALESCE(MAX(messages.created_at), TIMESTAMP \'1999-12-31\') AS latest_message_time')
       .group('chatrooms.id')
       .order('latest_message_time DESC') }
-      
+
   scope :user_chatrooms, -> (user) {
     joins(:messages)
       .where(messages: { user: user })
@@ -23,6 +24,6 @@ class Chatroom < ApplicationRecord
   end
 
   def user_count
-    users.uniq.count
+    users.count
   end
 end

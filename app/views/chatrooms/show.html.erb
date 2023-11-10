@@ -1,7 +1,7 @@
 <%= turbo_stream_from "chatroom" %>
-
+<%= link_to '🚪 Leave chat', chatroom_user_chatroom_path(@chatroom), data: {turbo_method: :delete}, class: 'block w-max mr-0 ml-auto text-right bg-primary hover:bg-primary-dark text-white py-2 px-5 rounded cursor-pointer mx-auto mb-3' %>
 <div class="flex gap-5">
-  <div class="w-4/12 h-80vh overflow-scroll">
+  <div class="w-4/12 h-70vh overflow-scroll">
     <h2 class="font-bold text-lg">📫 My chatrooms</h2>
     <%= render 'chatroom_preview', chatrooms: @chatrooms %>
   </div>
@@ -11,7 +11,7 @@
     <%= render 'chatrooms/user_count', count: @chatroom.user_count %>
 
     <div class="h-60vh w-full overflow-scroll px-4 bg-secondary py-4 rounded-lg">
-      <%= turbo_frame_tag :messages do %>
+      <%= turbo_frame_tag "messages_#{@chatroom.id}" do %>
           <% if @messages %>
             <% @messages.each do |message| %>
               <%= render 'messages/message', message: message %>
