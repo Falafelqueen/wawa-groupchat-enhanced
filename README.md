@@ -2,7 +2,9 @@
 
 Simple chat application built in 4 hours.
 
-Feautures
+[Demo here](https://wawa-groupchat-enhanced-025b77750861.herokuapp.com/)
+
+Feautures:
 * Rails 7
 
 * User authentication with Devise
