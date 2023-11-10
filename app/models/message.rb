@@ -16,12 +16,12 @@ class Message < ApplicationRecord
     # Update chatroom list on index
     broadcast_replace_to "chatrooms", partial: "chatrooms/chatroom", target: "chatroom_#{chatroom.id}", locals: {chatroom: chatroom}
     # Update chatroom list on show
-    broadcast_replace_to "chatroom", partial: "chatrooms/chatroom", target: "chatroom_#{chatroom.id}", locals: {chatroom: chatroom}
+    broadcast_replace_to "chatroom", partial: "chatrooms/chatroom", target: "chatroom_#{chatroom.id}", locals: {chatroom: chatroom, hide_count: true}
   end
 
   def update_user_preview
     # Display the chatroom as user chat in the preview list
-    broadcast_replace_to "chatroom", partial: "chatrooms/chatroom_preview", target: "chatroom_preview", locals: {chatrooms: Chatroom.user_chatrooms(user).ordered_by_latest_message }
+    broadcast_replace_to "chatroom", partial: "chatrooms/chatroom_preview", target: "chatroom_preview", locals: {chatrooms: Chatroom.user_chatrooms(user).ordered_by_latest_message, hide_count: true }
   end
 
   def update_user_count

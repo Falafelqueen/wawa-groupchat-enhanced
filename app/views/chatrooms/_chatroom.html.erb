@@ -1,8 +1,11 @@
+<% hide_count = hide_count || false %>
 <%= turbo_frame_tag dom_id(chatroom) do %>
   <%= link_to chatroom_path(chatroom), class: 'block p-7 w-full rounded-lg shadow-md my-4 bg-white', data: {turbo_frame: '_top'} do %>
         <div class="flex justify-between">
           <h3 class="font-bold"><%= chatroom.name %></h3>
-          <%= render 'chatrooms/user_count', count: chatroom.user_count %>
+          <% unless hide_count %>
+            <%= render 'chatrooms/user_count', count: chatroom.user_count %>
+          <% end %>
         </div>
         <% if message = chatroom.latest_message %>
           <p class="text-primary-light"><%= "#{message.text} by #{message.user.display_name} (#{time_ago(message.created_at)}) "%></p>
