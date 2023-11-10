@@ -1,5 +1,5 @@
 <%# hide_count is used to not display the count on preview or in case that there is another user_count frame on the page %>
-<% current_user = current_user || @user %>
+<% current_user = current_user || @user || "" %>
 <% hide_count = hide_count || false %>
 <%= turbo_frame_tag dom_id(chatroom) do %>
   <%= link_to chatroom.users.include?(current_user) ? chatroom_path(chatroom) : chatroom_user_chatrooms_path(chatroom), class: 'block p-7 w-full rounded-lg shadow-md my-4 bg-white', data: {turbo_frame: '_top', turbo_method: chatroom.users.include?(current_user) ? :get : :post} do %>
