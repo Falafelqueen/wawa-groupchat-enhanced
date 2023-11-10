@@ -10,7 +10,6 @@ class Message < ApplicationRecord
 
   def update_chatroom
     # Update user count
-    #broadcast_replace_to "chatroom", target: "user-count", partial: "chatrooms/user_count", locals: {count: chatroom.user_count}
     # Append message to chatroom
     broadcast_append_to "chatroom", target: "messages", partial: "messages/message", locals: { message: self }
     # Update chatroom list on index
@@ -21,7 +20,7 @@ class Message < ApplicationRecord
 
   def update_user_preview
     # Display the chatroom as user chat in the preview list
-    broadcast_replace_to "chatroom", partial: "chatrooms/chatroom_preview", target: "chatroom_preview", locals: {chatrooms: Chatroom.user_chatrooms(user).ordered_by_latest_message, hide_count: true }
+    broadcast_replace_to "chatroom", partial: "chatrooms/chatroom_preview", target: "chatroom_preview", locals: {chatrooms: Chatroom.ordered_by_latest_message, hide_count: true }
   end
 
   def update_user_count

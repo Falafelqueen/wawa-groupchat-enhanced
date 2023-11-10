@@ -1,3 +1,4 @@
+<%# hide_count is used to not display the count on preview or in case that there is another user_count frame on the page %>
 <% hide_count = hide_count || false %>
 <%= turbo_frame_tag dom_id(chatroom) do %>
   <%= link_to chatroom_path(chatroom), class: 'block p-7 w-full rounded-lg shadow-md my-4 bg-white', data: {turbo_frame: '_top'} do %>
