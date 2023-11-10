@@ -2,7 +2,7 @@
   <%= link_to chatroom_path(chatroom), class: 'block p-7 w-full rounded-lg shadow-md my-4 bg-white', data: {turbo_frame: '_top'} do %>
         <div class="flex justify-between">
           <h3 class="font-bold"><%= chatroom.name %></h3>
-          <p class="text-right text-gray-600"><%= "👥 #{pluralize(chatroom.users.uniq.count, 'user')}" %></p>
+          <%= render 'chatrooms/user_count', count: chatroom.user_count %>
         </div>
         <% if message = chatroom.latest_message %>
           <p class="text-primary-light"><%= "#{message.text} by #{message.user.display_name} (#{time_ago(message.created_at)}) "%></p>

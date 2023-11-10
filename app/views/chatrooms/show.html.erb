@@ -1,19 +1,27 @@
 <%= turbo_stream_from "chatroom" %>
 
-<h2 class="text-center font-bold text-3xl">📬 <%= @chatroom.name %></h2>
+<div class="flex gap-5">
+  <div class="w-4/12 h-80vh overflow-scroll">
+    <h2 class="font-bold text-lg">📫 My chatrooms</h2>
+    <%= render 'chatroom_preview', chatrooms: @chatrooms %>
+  </div>
+  <div class="grow">
+    <h2 class="text-center font-bold text-3xl">📬 <%= @chatroom.name %></h2>
 
-<%= render 'chatrooms/user_count', count: @chatroom.user_count %>
+    <%= render 'chatrooms/user_count', count: @chatroom.user_count %>
 
-<div class="h-60vh w-full overflow-scroll px-4 bg-secondary py-4 rounded-lg">
-  <%= turbo_frame_tag :messages do %>
-      <% if @messages %>
-        <% @messages.each do |message| %>
-          <%= render 'messages/message', message: message %>
-        <% end %>
+    <div class="h-60vh w-full overflow-scroll px-4 bg-secondary py-4 rounded-lg">
+      <%= turbo_frame_tag :messages do %>
+          <% if @messages %>
+            <% @messages.each do |message| %>
+              <%= render 'messages/message', message: message %>
+            <% end %>
+          <% end %>
       <% end %>
-  <% end %>
-</div>
+    </div>
 
-<%= render 'messages/new_message_form', chatroom: @chatroom, message: @message %>
+    <%= render 'messages/new_message_form', chatroom: @chatroom, message: @message %>
+  </div>
+</div>
 
 <%= link_to '📤 All chatrooms', chatrooms_path, class: 'hover:font-bold' %>

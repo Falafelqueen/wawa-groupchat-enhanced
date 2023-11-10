@@ -10,6 +10,8 @@ class ChatroomsController < ApplicationController
     @messages = @chatroom.messages.includes(:user)
     @message = Message.new
     @user =  current_user
+
+    @chatrooms = Chatroom.user_chatrooms(current_user).ordered_by_latest_message
   end
 
   def create
