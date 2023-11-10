@@ -2,10 +2,7 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :chatroom
 
-  after_create_commit :update_chatroom
-  after_create_commit :update_user_count
-  after_create_commit :update_user_preview
-  after_create_commit :join_chatroom
+  after_create_commit :update_chatroom, :update_user_count, :update_user_preview, :join_chatroom
 
   private
 
@@ -17,7 +14,7 @@ class Message < ApplicationRecord
   end
 
   def update_chatroom
-    # Append message to chatroom
+    ## Append message to chatroom
     broadcast_append_to "chatroom", target: "messages_#{chatroom.id}", partial: "messages/message", locals: { message: self }
     # Update chatroom list on index
     broadcast_replace_to "chatrooms", partial: "chatrooms/chatroom", target: "chatroom_#{chatroom.id}", locals: {chatroom: chatroom}
