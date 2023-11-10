@@ -6,7 +6,7 @@
     <div class="flex justify-between">
       <h3 class="font-bold"><%= chatroom.name %></h3>
       <% unless hide_count %>
-        <%= render 'chatrooms/user_count', count: chatroom.user_count %>
+        <%= render 'chatrooms/user_count', chatroom: chatroom %>
       <% end %>
     </div>
     <% if message = chatroom.latest_message %>

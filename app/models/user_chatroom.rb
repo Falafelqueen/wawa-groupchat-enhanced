@@ -11,7 +11,7 @@ class UserChatroom < ApplicationRecord
 
   def update_user_count
     # binding.break
-    broadcast_replace_to "chatroom", target: "user-count", partial: "chatrooms/user_count", locals: {count: chatroom.user_count}
-    broadcast_replace_to "chatrooms", target: "user-count", partial: "chatrooms/user_count", locals: {count: chatroom.user_count}
+    broadcast_replace_to "chatroom", target: "user-count-#{chatroom.id}", partial: "chatrooms/user_count", locals: {chatroom: chatroom}
+    broadcast_replace_to "chatrooms", target: "user-count-#{chatroom.id}", partial: "chatrooms/user_count", locals: {chatroom: chatroom}
   end
 end
