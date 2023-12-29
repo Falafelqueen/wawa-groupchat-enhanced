@@ -1,6 +1,6 @@
 # README
 
-Simple chat application built in 4 hours.
+Simple chat application built in 6 hours.
 
 Feautures
 * Rails 7
